@@ -56,6 +56,8 @@ class MovingObject {
    * by checking the distance between the two objects' co-ordinates.
    * i.e. the x and y of the center of their hit-circles.
    * 
+   * TODO: potentially replace with a more complex collision login in the future. 
+   * 
    * as per https://www.whitman.edu/mathematics/calculus_online/section01.02.html
    * 
    * @param {MovingObject} object - Another moving Object
@@ -65,6 +67,8 @@ class MovingObject {
     let deltaY = this.y - object.y;
     let distance = (Math.sqrt(Math.pow(deltaX, 2) + (Math.pow(deltaY, 2))));
 
+    // If the distance between the two centers is less than the sum of their radii
+    // then the two hit-circles overlap, thus 'colliding'. 
     if (distance < (this.radius + object.radius)){
       return true;
     }
