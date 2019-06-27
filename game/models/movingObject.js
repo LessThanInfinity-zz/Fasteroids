@@ -73,3 +73,6 @@ class MovingObject {
       return true;
     }
   }
+}
+
+export default MovingObject;

@@ -1,4 +1,5 @@
 import { default as COLORS } from '../../helpers/constants/colors.js'
+import MovingObject from './movingObject.js'
 
 class Asteroid extends MovingObject {
   constructor(startX, startY){
@@ -37,9 +38,9 @@ class Asteroid extends MovingObject {
     context.arc(
       x, 
       y, 
-      radius: r, 
-      startAngle: 0, 
-      endAngle: Math.PI * 2, 
+      radius=r, 
+      startAngle=0, 
+      endAngle=Math.PI * 2, 
       true // anticlockwise. TODO: is this necessary?
     )
 
@@ -85,3 +86,5 @@ class Asteroid extends MovingObject {
   }
 
 }
+
+export default Asteroid;

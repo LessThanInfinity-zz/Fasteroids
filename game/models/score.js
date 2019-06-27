@@ -1,3 +1,5 @@
+import MovingObject from './movingObject.js'
+
 class Score extends MovingObject{
 
   /**
@@ -50,3 +52,5 @@ class Score extends MovingObject{
     }
   }
 }
+
+export default Score;
