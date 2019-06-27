@@ -62,7 +62,7 @@ class MovingObject {
    * 
    * @param {MovingObject} object - Another moving Object
    */
-  collide?(object){
+  hasCollidedWith(object){
     let deltaX = this.x - object.x;
     let deltaY = this.y - object.y;
     let distance = (Math.sqrt(Math.pow(deltaX, 2) + (Math.pow(deltaY, 2))));
