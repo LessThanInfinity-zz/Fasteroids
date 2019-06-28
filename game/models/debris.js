@@ -1,4 +1,4 @@
-import MovingObject from "./movingObject";
+import MovingObject from "./movingObject.js";
 
 class Debris extends MovingObject {
   constructor(startX, startY, endX, endY){
@@ -33,3 +33,5 @@ class Debris extends MovingObject {
     this.endY += dy;
   }
 }
+
+export default Debris

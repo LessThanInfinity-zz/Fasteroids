@@ -1,5 +1,7 @@
-import MovingObject from "./movingObject";
-import { default as COLORS } from "../../helpers/constants/colors";
+import MovingObject from "./movingObject.js";
+import { default as COLORS } from "../../helpers/constants/colors.js";
+
+
 
 class Ship extends MovingObject {
   constructor(startX, startY){
@@ -193,3 +195,6 @@ class Ship extends MovingObject {
 
 
 }
+
+
+export default Ship;

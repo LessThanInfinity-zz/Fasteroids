@@ -1,9 +1,9 @@
-import { MovingObject } from './models/movingObject.js'
-import { Asteroid } from './models/asteroid.js';
-import { Bullet } from './models/bullet.js';
-import { Ship } from "./models/ship.js";
-import { Debris } from "./models/debris.js";
-import { Score } from "./models/score.js";
+import { default as MovingObject } from './models/movingObject.js'
+import { default as Asteroid } from './models/asteroid.js';
+import { default as Bullet } from './models/bullet.js';
+import { default as Ship } from "./models/ship.js";
+import { default as Debris } from "./models/debris.js";
+import { default as Score } from "./models/score.js";
 
 let WIDTH;
 let HEIGHT;
