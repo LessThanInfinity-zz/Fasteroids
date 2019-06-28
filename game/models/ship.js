@@ -142,7 +142,53 @@ class Ship extends MovingObject {
     this._drawHitCircle(context, x, y);
     this._updateShipCoordinates();
     this._drawShip(context, x, y);
+    this._drawIgnitionTail(context, x, y);
 
+  }
+
+  accelerate(){
+    this.vx += 0.2*Math.sin(this.angle);
+    // Prevent ship from reaching light speed. 
+    if (this.vx > 10){
+      this.vx = 10;
+    } else if (this.vx < -10){
+      this.vx = -10;
+    }
+
+    // Prevent ship from reaching light speed. 
+    this.vy += -0.2*Math.cos(this.angle);
+    if (this.vy > 10){
+      this.vy = 10;
+    } else if (this.vy < -10){
+      this.vy = -10;
+    }
+  }
+
+  decelerate(){
+    this.vx -= 0.2*Math.sin(this.angle);
+
+    // Prevent ship from reaching light speed. 
+    if (this.vx > 10){
+      this.vx = 10;
+    } 
+
+    this.vy -= -0.2*Math.cos(this.angle);
+    if (this.vy > 10){
+      this.vy = 10;
+    } 
+  }
+
+  /**
+   * 
+   * @param {Number} dAngle - change in angle. 
+   */
+  steer(dAngle){
+    this.angle += dAngle
+  }
+
+  fireBullet(){
+    let bullet = new Bullet(this.x + this.nose[0], this.y + this.nose[1], this.angle);
+    return bullet;
   }
 
 
