@@ -38,8 +38,8 @@ class Asteroid extends MovingObject {
       x, 
       y, 
       r, 
-      startAngle=0, 
-      endAngle=Math.PI * 2, 
+      0, /* startAngle. TODO: move to named parameter once test working.  */
+      Math.PI * 2, /* endAngle. TODO: move to named parameter once test working.  */
       true // anticlockwise. TODO: is this necessary?
     )
 
