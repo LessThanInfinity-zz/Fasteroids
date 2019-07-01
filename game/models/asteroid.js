@@ -3,8 +3,7 @@ import MovingObject from './movingObject.js'
 
 class Asteroid extends MovingObject {
   constructor(startX, startY){
-    
-    let radius = this._randomizeRadius();
+    let radius = 40 + Math.random() * 50;
     super(startY, startY, radius);
     this._randomizeSpeed()
 
@@ -38,7 +37,7 @@ class Asteroid extends MovingObject {
     context.arc(
       x, 
       y, 
-      radius=r, 
+      r, 
       startAngle=0, 
       endAngle=Math.PI * 2, 
       true // anticlockwise. TODO: is this necessary?

@@ -60,15 +60,16 @@
 
   <script type="module" src="./game/main.js"></script>
 
-  <script>
-    // var test = new Asteroids(); 
+  <script type="module">
+    import { default as Asteroids } from './game/main.js';
+    var test = new Asteroids();  
 
-    // $(document).on('keypress', function(event){
-    //   if (event.which==13){
-    //     console.log('enter pressed.');
-    //     location.reload();
-    //   }
-    // })
+    $(document).on('keypress', function(event){
+      if (event.which==13){
+        console.log('enter pressed.');
+        location.reload();
+      }
+    })
   </script>
 
 </body>

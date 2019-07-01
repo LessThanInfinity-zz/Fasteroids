@@ -2,7 +2,7 @@ import MovingObject from "./movingObject.js";
 
 class Debris extends MovingObject {
   constructor(startX, startY, endX, endY){
-    super(startX, startY, radius=0);
+    super(startX, startY, 0);
     this.endX = endX;
     this.endY = endY;
 

@@ -5,7 +5,8 @@ import { default as COLORS } from "../../helpers/constants/colors.js";
 
 class Ship extends MovingObject {
   constructor(startX, startY){
-    super(startX, startY, radius=25);
+    let radius = 25;
+    super(startX, startY, radius);
 
     this._setInitialVelocity();
     this._setInitialPosition();
@@ -84,7 +85,7 @@ class Ship extends MovingObject {
     // TODO: what is this doing, first?
     // TODO: draw hitCircle. 
     context.beginPath();
-    context.arc(x, y, radius=this.r, startAngle=0, endAngle=Math.PI*2, true);
+    context.arc(x, y, this.r, 0, Math.PI*2, true); // TODO: apparently this doesnt support es6?
     context.fillStyle = COLORS.BLACK;
     context.fill();
     context.closePath();

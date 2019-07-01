@@ -1,13 +1,17 @@
-import { MovingObject } from './models/movingObject.js'
-import { Asteroid } from './models/asteroid.js';
-import { Bullet } from './models/bullet.js';
-import { default as Ship } from "./models/ship.js";
-import { Debris } from "./models/debris.js";
-import { Score } from "./models/score.js";
+import { default as MovingObject } from './movingObject.js'
+import { default as Asteroid } from './asteroid.js';
+import { default as Bullet } from './bullet.js';
+import { default as Ship } from "./ship.js";
+import { default as Debris } from "./debris.js";
+import { default as Score } from "./score.js";
+
+let WIDTH = 1250//elem.width();
+let HEIGHT = 600//elem.height();
 
 class Game {
   constructor(context){
     this._init();
+    this.context = context;
   }
 
   _init(){
@@ -29,15 +33,15 @@ class Game {
 
   _initializeAsteroids(){
     for (var i = 0; i < 20; i++){
-      this.asteroids.push(randomAsteroid());
+      this.asteroids.push(this._spawnAsteroid());
     }
   }
 
   draw(){
-    this._drawShip(context);
-    this._drawAsteroids(context);
-    this._drawBullets(context);
-    this._drawScores(context);
+    this._drawShip(this.context);
+    this._drawAsteroids(this.context);
+    this._drawBullets(this.context);
+    this._drawScores(this.context);
 
     this._refillAsteroids()
   }
@@ -65,28 +69,28 @@ class Game {
     let walls = ['left','right', 'top','bottom'];
     // chooses random wall to spawn asteroid from.
     let sample = walls[Math.floor((Math.random()*4)/1)];
-  
+    let startX, startY; 
+
     switch (sample){
     case "left":
-      let startX = 0;
-      let startY = Math.random() * HEIGHT;
+      startX = 0;
+      startY = Math.random() * HEIGHT;
       break;
     case "right":
-      let startX = WIDTH;
-      let startY = Math.random() * HEIGHT;
+      startX = WIDTH;
+      startY = Math.random() * HEIGHT;
       break;
     case "top":
-      let startX = Math.random() * WIDTH;
-      let startY = 0;
+      startX = Math.random() * WIDTH;
+      startY = 0;
       break;
     case "bottom":
-      let startX = Math.random() * WIDTH;
-      let startY = HEIGHT;
+      startX = Math.random() * WIDTH;
+      startY = HEIGHT;
       break;
       }
   
-    asteroid = new Asteroid(startX, startY);
-    return asteroid;
+    return new Asteroid(startX, startY);
   }
 
   _drawShip(context){
@@ -137,3 +141,5 @@ class Game {
     context.fillText("SCORE: " + this.totalScore,20,40 );
   }
 }
+
+export default Game;
