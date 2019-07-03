@@ -62,7 +62,74 @@ class Game {
   }
 
   update(){
+    this._updateShip();
+    this._updateAsteroids();
+    this._updateDebris();
+    this._updateBullets();
+    this._updateScores();
 
+
+  }
+
+  _updateShip(){
+    this.ship.update(this.ship.vx, this.ship.vy);
+  }
+
+  _updateAsteroids(){
+    this.asteroids.forEach((asteroid)=>{
+      asteroid.update(asteroid.dx,asteroid.dy);
+      this._checkForCollision(this.ship, asteroid);
+      asteroid.resetOffScreen();
+    });
+  }
+
+  _updateDebris(){
+    this.parts.forEach((part)=>{
+      part.update(part.dx, part.dy);
+    })
+  }
+
+  _updateBullets(){
+    this.bullets.forEach((bullet)=>{
+      if (!bullet.done){ bullet.update(bullet.vx, bullet.vy); }
+    })
+
+    let currentAsteroids = this.asteroids;
+
+    currentAsteroids.forEach((asteroid)=>{
+      if (bullet.hasCollidedWith(asteroid)){
+        bullet.done = true;
+        // this.bullets.splice()
+        let currPoints    = 1000;
+        let scoreToAdd    = new Score(bullet.x, bullet.y, currPoints);
+        this.scores       = scores.concat(scoreToAdd);
+        this.totalScore  += currPoints;
+
+        /* Update Asteroids. TODO: this seems not okay, bec*/
+        this.asteroids = asteroids.concat(asteroid.explode());
+        this.asteroids.splice(j,1);
+        
+        bullets.splice(i,1);
+
+      }
+    })
+  }
+
+  _checkForCollision(ship, asteroid){
+    if (!ship.isDestroyed){
+      if (ship.hasCollidedWith(asteroid)){
+        this._destroyShip();
+      }
+    }
+  }
+
+  _destroyShip(){
+    let part1 = new Debris(ship.x + ship.nose[0],      ship.y + ship.nose[1],      ship.x + ship.leftWing[0],  ship.y + ship.leftWing[1]);
+    let part2 = new Debris(ship.x + ship.leftWing[0],  ship.y + ship.leftWing[1],  ship.x + ship.rightWing[0], ship.y + ship.rightWing[1]);
+    let part3 = new Debris(ship.x + ship.rightWing[0], ship.y + ship.rightWing[1], ship.x + ship.nose[0],      ship.y + ship.nose[1]);
+
+    this.parts = [part1, part2, part3];
+    this.ship.isDestroyed = true;
   }
 
   _spawnAsteroid(){

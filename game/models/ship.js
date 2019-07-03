@@ -193,6 +193,7 @@ class Ship extends MovingObject {
     let bullet = new Bullet(this.x + this.nose[0], this.y + this.nose[1], this.angle);
     return bullet;
   }
+  
 
 
 }
