@@ -61,13 +61,42 @@ class Game {
   }
 
   update(){
+
+    this._handleKeyInput();
+
     this._updateShip();
-    this._updateAsteroids();
+    // this._updateAsteroids();
     this._updateDebris();
     this._updateBullets();
     this._updateScores();
 
     this.ship.resetOffScreen();
+  }
+
+  _handleKeyInput(){
+    if  (!this.ship.isDestroyed){
+      if (key.isPressed(37)) this.ship.steer(-0.2);
+      if (key.isPressed(39)) this.ship.steer(0.2);
+  
+      if (key.isPressed(38)){
+        this.ship.accelerate();
+        this.ship.pedal = true;
+      }
+  
+      if (!key.isPressed(38) && this.ship.pedal){
+      this.ship.pedal = false;
+      }
+  
+      key('space', () => {
+        var newBullet = this.ship.fireBullet();
+        if (this.bullets.length < 2){
+          if (!this.ship.isDestroyed){
+            console.log("fire. BUllets:", this.bullets);
+            this.bullets.push(newBullet);        
+            }
+          }
+        }); 
+    }
   }
 
   _updateShip(){

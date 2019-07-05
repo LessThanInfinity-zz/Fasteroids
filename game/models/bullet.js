@@ -1,4 +1,5 @@
 import MovingObject from './movingObject.js'
+import { default as COLORS } from "../../helpers/constants/colors.js";
 
 class Bullet extends MovingObject {
   constructor(startX, startY, angle){

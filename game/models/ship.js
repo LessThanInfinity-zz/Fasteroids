@@ -1,4 +1,5 @@
 import MovingObject from "./movingObject.js";
+import { default as Bullet } from './bullet.js';
 import { default as COLORS } from "../../helpers/constants/colors.js";
 
 
@@ -35,6 +36,7 @@ class Ship extends MovingObject {
     this._updateRightWing();
     this._updateLeftLeg();
     this._updateRightLeg();
+    this._updateIgnitionTail();
   }
 
   _updateNose(){
@@ -75,6 +77,7 @@ class Ship extends MovingObject {
   }
   _updateIgnitionTail(){
     // Update ignition Tail. 
+    
     let tail = [0,this.radius+this.radius/2];
     let tailX = tail[0]*Math.cos(this.angle) - tail[1]*Math.sin(this.angle);
     let tailY = tail[0]*Math.sin(this.angle) + tail[1]*Math.cos(this.angle);
@@ -128,12 +131,13 @@ class Ship extends MovingObject {
       } else {
         blackOrWhite = COLORS.WHITE;
       }
-        // var strokes = ["#ffffff", "F8F539", "F89239","F83939", "#000000"];
+      // var strokes = ["#ffffff", "F8F539", "F89239","F83939", "#000000"];
       context.strokeStyle = blackOrWhite; // strokes[Math.floor(Math.random() * strokes.length)];
+      context.lineWidth = 1.5;
       context.moveTo(x+ this.leftWing[0], y+ this.leftWing[1]);
-      context.lineTo(x + tailX, y+ tailY);
+      context.lineTo(x + this.tail[0], y+ this.tail[1]);
       context.lineTo(x + this.rightWing[0], y+ this.rightWing[1]);
-        context.stroke();
+      context.stroke();
       context.closePath();
     }
   }
