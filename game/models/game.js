@@ -4,6 +4,7 @@ import { default as Bullet } from './bullet.js';
 import { default as Ship } from "./ship.js";
 import { default as Debris } from "./debris.js";
 import { default as Score } from "./score.js";
+import { default as COLORS } from '../../helpers/constants/colors.js'
 import { default as SETTINGS } from '../../helpers/constants/settings.js'
 
 class Game {
@@ -48,11 +49,11 @@ class Game {
     let loop = setInterval(() => {
 
     context.clearRect(0,0,SETTINGS.CANVAS_WIDTH,SETTINGS.CANVAS_HEIGHT);
-    context.fillStyle = "#000000"
+    context.fillStyle = COLORS.BLACK
     context.fillRect(0,0,SETTINGS.CANVAS_WIDTH, SETTINGS.CANVAS_HEIGHT)
 
     this.draw(context);
-    /* This controls the game's end-state, although the game doesn't exactly... "end". */
+    // /* This controls the game's end-state, although the game doesn't exactly... "end". */
     if(this.update()){
       clearInterval(loop);
     }
@@ -184,7 +185,7 @@ class Game {
   _drawAsteroids(context){
     for(let i = 0; i < this.asteroids.length; i++){
       let asteroid = this.asteroids[i];
-      this.asteroids[i].draw(context, asteroid.x, asteroid.y, asteroid.r);
+      this.asteroids[i].draw(context, asteroid.x, asteroid.y, asteroid.radius);
     }
   }
 

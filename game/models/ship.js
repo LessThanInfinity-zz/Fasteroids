@@ -85,7 +85,7 @@ class Ship extends MovingObject {
     // TODO: what is this doing, first?
     // TODO: draw hitCircle. 
     context.beginPath();
-    context.arc(x, y, this.r, 0, Math.PI*2, true); // TODO: apparently this doesnt support es6?
+    context.arc(x, y, this.radius, 0, Math.PI*2, true); // TODO: apparently this doesnt support es6?
     context.fillStyle = COLORS.BLACK;
     context.fill();
     context.closePath();

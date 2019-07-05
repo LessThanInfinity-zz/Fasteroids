@@ -27,7 +27,7 @@ class Bullet extends MovingObject {
   /* Circular bullets. */
   draw(context){
     context.beginPath();
-    context.arc(this.x, this.y, this.r,0, Math.PI*2, true);
+    context.arc(this.x, this.y, this.radius,0, Math.PI*2, true);
     context.fillStyle = COLORS.WHITE;
     context.fill();
     context.closePath();

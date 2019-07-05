@@ -5,7 +5,7 @@ class Asteroid extends MovingObject {
   constructor(startX, startY){
     let radius = 40 + Math.random() * 50;
     super(startY, startY, radius);
-    this._randomizeSpeed()
+    this._randomizeSpeed();
 
   }
 
@@ -42,7 +42,6 @@ class Asteroid extends MovingObject {
       Math.PI * 2, /* endAngle. TODO: move to named parameter once test working.  */
       true // anticlockwise. TODO: is this necessary?
     )
-
     // Stroke with white borders.
     context.strokeStyle = COLORS.WHITE;
     context.lineWidth = 4;
@@ -69,7 +68,7 @@ class Asteroid extends MovingObject {
       // TODO: currently only spawns at the center of parent. 
       let newAsteroid = new Asteroid(this.x, this.y);
 
-      if (newAsteroid.r > 6){
+      if (newAsteroid.radius > 6){
         newAsteroids.push(newAsteroid);
       }
     }

@@ -23,7 +23,7 @@ class MovingObject {
    */
   update(dx, dy){
     this.x += dx;
-    this.u += dy;
+    this.y += dy;
   }
 
   /**
