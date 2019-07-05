@@ -33,23 +33,23 @@ class MovingObject {
    */
   resetOffScreen(){
      // If object beyond the Left bounds, reset to right
-    if (this.x < 0){
-      this.x = SETTINGS.CANVAS_WIDTH;
+    if (this.x < 0 - this.radius){
+      this.x = SETTINGS.CANVAS_WIDTH + this.radius;
     }
 
     // If object beyond the Right bounds, reset to Left
-    else if (this.x > SETTINGS.CANVAS_WIDTH){
-      this.x = 0;
+    else if (this.x > SETTINGS.CANVAS_WIDTH + this.radius){
+      this.x = 0 - this.radius;
     }
 
     // If object beyond Top, reset to bottom
-    else if (this.y < 0){
-      this.y = SETTINGS.CANVAS_HEIGHT;
+    else if (this.y < 0 - this.radius){
+      this.y = SETTINGS.CANVAS_HEIGHT + this.radius;
     }
 
     // If object beyond Bottom, reset to top
-    else if (this.y > SETTINGS.CANVAS_HEIGHT){
-      this.y = 0;
+    else if (this.y > SETTINGS.CANVAS_HEIGHT + this.radius){
+      this.y = 0 - this.radius;
     }
   }
 
