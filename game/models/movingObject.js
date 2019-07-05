@@ -1,3 +1,5 @@
+import { default as SETTINGS } from '../../helpers/constants/settings.js'
+
 class MovingObject {
 
   /**
@@ -32,21 +34,21 @@ class MovingObject {
   resetOffScreen(){
      // If object beyond the Left bounds, reset to right
     if (this.x < 0){
-      this.x = WIDTH;
+      this.x = SETTINGS.CANVAS_WIDTH;
     }
 
     // If object beyond the Right bounds, reset to Left
-    else if (this.x > WIDTH){
+    else if (this.x > SETTINGS.CANVAS_WIDTH){
       this.x = 0;
     }
 
     // If object beyond Top, reset to bottom
     else if (this.y < 0){
-      this.y = HEIGHT;
+      this.y = SETTINGS.CANVAS_HEIGHT;
     }
 
     // If object beyond Bottom, reset to top
-    else if (this.y > HEIGHT){
+    else if (this.y > SETTINGS.CANVAS_HEIGHT){
       this.y = 0;
     }
   }

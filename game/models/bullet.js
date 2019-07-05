@@ -18,9 +18,9 @@ class Bullet extends MovingObject {
   isOffScreen(){
     return (
       this.x < 0 || 
-      this.x > WIDTH || 
+      this.x > CANVAS_WIDTH || 
       this.y < 0 || 
-      this.y > HEIGHT
+      this.y > CANVAS_HEIGHT
     );
   }
 

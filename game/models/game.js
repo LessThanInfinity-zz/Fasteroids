@@ -4,9 +4,7 @@ import { default as Bullet } from './bullet.js';
 import { default as Ship } from "./ship.js";
 import { default as Debris } from "./debris.js";
 import { default as Score } from "./score.js";
-
-let WIDTH = 1250//elem.width();
-let HEIGHT = 600//elem.height();
+import { default as SETTINGS } from '../../helpers/constants/settings.js'
 
 class Game {
   constructor(context){
@@ -28,7 +26,7 @@ class Game {
   }
 
   _initializeShip(){
-    this.ship = new Ship(WIDTH/2, HEIGHT/2);
+    this.ship = new Ship(SETTINGS.CANVAS_WIDTH/2, SETTINGS.CANVAS_HEIGHT/2);
   }
 
   _initializeAsteroids(){
@@ -49,9 +47,9 @@ class Game {
   start(context){
     let loop = setInterval(() => {
 
-    context.clearRect(0,0,WIDTH,HEIGHT);
+    context.clearRect(0,0,SETTINGS.CANVAS_WIDTH,SETTINGS.CANVAS_HEIGHT);
     context.fillStyle = "#000000"
-    context.fillRect(0,0,WIDTH, HEIGHT)
+    context.fillRect(0,0,SETTINGS.CANVAS_WIDTH, SETTINGS.CANVAS_HEIGHT)
 
     this.draw(context);
     /* This controls the game's end-state, although the game doesn't exactly... "end". */
@@ -68,7 +66,7 @@ class Game {
     this._updateBullets();
     this._updateScores();
 
-
+    this.ship.resetOffScreen();
   }
 
   _updateShip(){
@@ -92,25 +90,36 @@ class Game {
   _updateBullets(){
     this.bullets.forEach((bullet)=>{
       if (!bullet.done){ bullet.update(bullet.vx, bullet.vy); }
+      
+      let currentAsteroids = this.asteroids;
+  
+      currentAsteroids.forEach((asteroid)=>{
+        if (bullet.hasCollidedWith(asteroid)){
+          bullet.done = true;
+          // this.bullets.splice()
+          let currPoints    = 1000;
+          let scoreToAdd    = new Score(bullet.x, bullet.y, currPoints);
+          this.scores       = scores.concat(scoreToAdd);
+          this.totalScore  += currPoints;
+  
+          /* Update Asteroids. TODO: this seems not okay, bec*/
+          this.asteroids = asteroids.concat(asteroid.explode());
+          this.asteroids.splice(j,1);
+          
+          // bullets.splice(i,1);
+  
+        }
+      })
     })
 
-    let currentAsteroids = this.asteroids;
+  }
 
-    currentAsteroids.forEach((asteroid)=>{
-      if (bullet.hasCollidedWith(asteroid)){
-        bullet.done = true;
-        // this.bullets.splice()
-        let currPoints    = 1000;
-        let scoreToAdd    = new Score(bullet.x, bullet.y, currPoints);
-        this.scores       = scores.concat(scoreToAdd);
-        this.totalScore  += currPoints;
-
-        /* Update Asteroids. TODO: this seems not okay, bec*/
-        this.asteroids = asteroids.concat(asteroid.explode());
-        this.asteroids.splice(j,1);
-        
-        bullets.splice(i,1);
-
+  _updateScores(){
+    let scores = this.scores;
+    scores.forEach((score)=>{
+      score.update(score.dx, score.dy);
+      if (score.doneDisplaying){
+          // this.scores.splice(i, 1);
       }
     })
   }
@@ -124,6 +133,7 @@ class Game {
   }
 
   _destroyShip(){
+    let ship = this.ship;
     let part1 = new Debris(ship.x + ship.nose[0],      ship.y + ship.nose[1],      ship.x + ship.leftWing[0],  ship.y + ship.leftWing[1]);
     let part2 = new Debris(ship.x + ship.leftWing[0],  ship.y + ship.leftWing[1],  ship.x + ship.rightWing[0], ship.y + ship.rightWing[1]);
     let part3 = new Debris(ship.x + ship.rightWing[0], ship.y + ship.rightWing[1], ship.x + ship.nose[0],      ship.y + ship.nose[1]);
@@ -141,19 +151,19 @@ class Game {
     switch (sample){
     case "left":
       startX = 0;
-      startY = Math.random() * HEIGHT;
+      startY = Math.random() * SETTINGS.CANVAS_HEIGHT;
       break;
     case "right":
-      startX = WIDTH;
-      startY = Math.random() * HEIGHT;
+      startX = SETTINGS.CANVAS_WIDTH;
+      startY = Math.random() * SETTINGS.CANVAS_HEIGHT;
       break;
     case "top":
-      startX = Math.random() * WIDTH;
+      startX = Math.random() * SETTINGS.CANVAS_WIDTH;
       startY = 0;
       break;
     case "bottom":
-      startX = Math.random() * WIDTH;
-      startY = HEIGHT;
+      startX = Math.random() * SETTINGS.CANVAS_WIDTH;
+      startY = SETTINGS.CANVAS_HEIGHT;
       break;
       }
   
