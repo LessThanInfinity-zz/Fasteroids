@@ -4,7 +4,7 @@ import MovingObject from './movingObject.js'
 class Asteroid extends MovingObject {
   constructor(startX, startY){
     let radius = 40 + Math.random() * 50;
-    super(startY, startY, radius);
+    super(startX, startY, radius);
     this._randomizeSpeed();
 
   }
