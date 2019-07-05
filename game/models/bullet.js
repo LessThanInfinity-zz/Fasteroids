@@ -1,5 +1,6 @@
 import MovingObject from './movingObject.js'
 import { default as COLORS } from "../../helpers/constants/colors.js";
+import { default as SETTINGS } from "../../helpers/constants/settings.js";
 
 class Bullet extends MovingObject {
   constructor(startX, startY, angle){
@@ -8,9 +9,11 @@ class Bullet extends MovingObject {
 
     // Set angle of ship. 
     this.angle = angle;
+    this.speed = 15;
+
     // Set horizontal velocity.
-    this.vx = this.speed + Math.sin(this.angle);
-    this.vy = this.speed + -Math.sin(this.angle);
+    this.vx = this.speed  * Math.sin(this.angle);
+    this.vy = this.speed  * -Math.cos(this.angle);
 
     // Indicates end of bullet life. 
     this.done = false; 
@@ -19,9 +22,9 @@ class Bullet extends MovingObject {
   isOffScreen(){
     return (
       this.x < 0 || 
-      this.x > CANVAS_WIDTH || 
+      this.x > SETTINGS.CANVAS_WIDTH || 
       this.y < 0 || 
-      this.y > CANVAS_HEIGHT
+      this.y > SETTINGS.CANVAS_HEIGHT
     );
   }
 

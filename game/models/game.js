@@ -65,7 +65,7 @@ class Game {
     this._handleKeyInput();
 
     this._updateShip();
-    // this._updateAsteroids();
+    this._updateAsteroids();
     this._updateDebris();
     this._updateBullets();
     this._updateScores();
@@ -118,15 +118,19 @@ class Game {
   }
 
   _updateBullets(){
-    this.bullets.forEach((bullet)=>{
-      if (!bullet.done){ bullet.update(bullet.vx, bullet.vy); }
+    this.bullets.forEach((bullet, index)=>{
+      if (!bullet.done){ 
+        console.log('bullet vx', bullet.vx, bullet.vy);
+        bullet.update(bullet.vx, bullet.vy); 
+      }
+
+      let currentAsteroids = []//this.asteroids;
       
-      let currentAsteroids = this.asteroids;
-  
       currentAsteroids.forEach((asteroid)=>{
         if (bullet.hasCollidedWith(asteroid)){
           bullet.done = true;
-          // this.bullets.splice()
+          this.bullets.splice();
+
           let currPoints    = 1000;
           let scoreToAdd    = new Score(bullet.x, bullet.y, currPoints);
           this.scores       = scores.concat(scoreToAdd);
@@ -136,10 +140,15 @@ class Game {
           this.asteroids = asteroids.concat(asteroid.explode());
           this.asteroids.splice(j,1);
           
-          // bullets.splice(i,1);
+          this.bullets.splice(i,1);
   
         }
       })
+
+      // Remove bullet if offscreen. 
+      if (!bullet.done && bullet.isOffScreen()){
+        this.bullets.splice(index, 1);
+      }
     })
 
   }
